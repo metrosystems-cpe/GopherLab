@@ -1,0 +1,117 @@
+{
+    "info": {
+        "_postman_id": "856f8702-f1a2-49e5-b5f2-c49279cad0eb",
+        "name": "GopherLab",
+        "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+    },
+    "item": [
+        {
+            "name": "tests",
+            "item": [
+                {
+                    "name": "localhost:8080/ping",
+                    "request": {
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"stored_fields\" : [\"my_text.romanian\"],\n    \"query\" : {\n        \"term\" : { \"my_text.romanian\" : \"rochie\" }\n    }\n}"
+                        },
+                        "url": {
+                            "raw": "localhost:8080/ping",
+                            "host": [
+                                "localhost"
+                            ],
+                            "port": "8080",
+                            "path": [
+                                "ping"
+                            ]
+                        }
+                    },
+                    "response": []
+                },
+                {
+                    "name": "localhost:8080/set-key",
+                    "request": {
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n\t\"key\": \"k3defttlovv\",\n\t\"value\": \"valueeee 150\",\n\t\"ttl\": 150\n}"
+                        },
+                        "url": {
+                            "raw": "localhost:8080/set-key",
+                            "host": [
+                                "localhost"
+                            ],
+                            "port": "8080",
+                            "path": [
+                                "set-key"
+                            ]
+                        }
+                    },
+                    "response": []
+                },
+                {
+                    "name": "localhost:8080/get-key/k3defttlovv",
+                    "request": {
+                        "method": "GET",
+                        "header": [],
+                        "body": {},
+                        "url": {
+                            "raw": "localhost:8080/get-key/k3defttlovv",
+                            "host": [
+                                "localhost"
+                            ],
+                            "port": "8080",
+                            "path": [
+                                "get-key",
+                                "k3defttlovv"
+                            ]
+                        }
+                    },
+                    "response": []
+                },
+                {
+                    "name": "localhost:8080/del-keys?keys=k1&keys=k2",
+                    "request": {
+                        "method": "DELETE",
+                        "header": [],
+                        "body": {},
+                        "url": {
+                            "raw": "localhost:8080/del-keys?keys=k1&keys=k2",
+                            "host": [
+                                "localhost"
+                            ],
+                            "port": "8080",
+                            "path": [
+                                "del-keys"
+                            ],
+                            "query": [
+                                {
+                                    "key": "keys",
+                                    "value": "k1"
+                                },
+                                {
+                                    "key": "keys",
+                                    "value": "k2"
+                                }
+                            ]
+                        }
+                    },
+                    "response": []
+                }
+            ]
+        }
+    ]
+}
