@@ -1,11 +1,20 @@
 # URL Shortener
 
-Service description
+A basic url shortener service that uses redis-service for key - value storage
+
+Features:
+
+- metrics : prometheus with opencensus.io
+- traces  : planned but not done !
+- web     : simple html with materialize css and js + axios (credits for the gopher picture goes to the owner)
+- tests   : planed but not done !
+
+## Service description
 
 ```bash
                            - path /                --> index.html
                          /
-user --> url-shortener < - - path /short&url={url} --> receive a short url
+user --> url-shortener < - - path /s&url={url}     --> receive a short url
                          \
                            - path /r/{key}         --> 301 to original url
 ```
@@ -14,7 +23,7 @@ user --> url-shortener < - - path /short&url={url} --> receive a short url
 
 ```bash
 # Method GET a URL shorted
-curl http://localhost:8081/short?url=https://medium.com/metrosystemsro/gitops-with-weave-flux-40997e929254
+curl http://localhost:8081/s?url=https://medium.com/metrosystemsro/gitops-with-weave-flux-40997e929254
 {"url":"localhost:8081/r/2600343750"}
 
 # use a short url

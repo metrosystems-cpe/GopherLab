@@ -57,7 +57,7 @@ func (sc *Config) StorageSet(data []byte) (bool, error) {
 	if err != nil {
 		return false, err
 	}
-	log.Println(resp.StatusCode)
+	// log.Println(resp.StatusCode)
 	if resp.StatusCode == http.StatusOK {
 		return true, nil
 	}

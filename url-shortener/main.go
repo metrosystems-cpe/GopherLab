@@ -87,11 +87,11 @@ func main() {
 	var addr = flag.String("addr", ":8081", "The addr of the application.")
 	mux := http.NewServeMux()
 
-	mux.Handle("/", http.FileServer(http.Dir("./html")))
+	mux.Handle("/", http.FileServer(http.Dir("./www")))
 	mux.Handle("/metrics", utils.OCPrometheusExporter())
 	// shortener handler will not allow child routes as it does not have a final '/'
 	// mux.HandleFunc("/short", utils.WithMetrics(shortHandler))
-	mux.HandleFunc("/short", shortHandler)
+	mux.HandleFunc("/s", shortHandler)
 	mux.HandleFunc("/r/", redirectHandler)
 
 	log.Println("Starting application on", *addr)
