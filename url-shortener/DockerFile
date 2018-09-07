@@ -1,0 +1,12 @@
+FROM              golang:1.10.3 AS server-build
+WORKDIR           /go/src/github.com/metrosystems-cpe/GopherLab/url-shortener
+COPY              . .
+RUN               go get
+# RUN               dep ensure -vendor-only
+RUN               make linux
+
+FROM              quay.io/prometheus/busybox:latest
+COPY              --from=server-build /go/src/github.com/metrosystems-cpe/GopherLab/url-shortener/url-shortener-linux-amd64 /url-shortener
+COPY              www /www
+EXPOSE            8081 
+ENTRYPOINT        [ "/url-shortener" ]

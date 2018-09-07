@@ -31,10 +31,14 @@ windows:
 	@echo ">> building windows binary"
 	GOOS=windows GOARCH=amd64 go build -o ${BINARY}-windows-${GOARCH}.exe . ;
 
-docker: 
+docker-build: 
 	@echo ">> building docker image"
-	docker build -t "$(DOCKER_IMAGE_NAME):$(DOCKER_IMAGE_TAG)" -f dbcmDockerFile .;
+	docker build -t "$(DOCKER_IMAGE_NAME):$(DOCKER_IMAGE_TAG)" -f DockerFile .;
 	@echo ">> docker run --rm -p 8081:8081 --name ${BINARY} -d ${BINARY}" ;
+
+docker-run: 
+	@echo ">> run docker image" ;
+	docker run --rm -p 8081:8081 --name url-shortener -d url-shortener ;
 
 release: linux docker
 

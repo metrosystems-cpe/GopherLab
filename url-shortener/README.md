@@ -1,6 +1,6 @@
 # URL Shortener
 
-A basic url shortener service that uses redis-service for key - value storage
+A basic url shortener service that uses [redis-service](https://github.com/metrosystems-cpe/GopherLab/tree/master/redis-service) for key - value storage
 
 Features:
 
@@ -31,3 +31,8 @@ curl http://localhost:8081/r/2600343750
 <a href="https://medium.com/metrosystemsro/gitops-with-weave-flux-40997e929254">Moved Permanently</a>.
 
 ```
+
+## url-shortener Contributors
+
+- [@ionutvilie](https://github.com/ionutvilie)
+- [@bogdanb07](https://github.com/bogdanb07)
