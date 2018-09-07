@@ -11,7 +11,15 @@ Build a simple app that make use of the redis-service - - > url-shortener
 
 ### redis-service [@kitz99](https://github.com/kitz99)
 
- { insert description here }
+A simple REST API built to establish communication between client & Redis instance over HTTP protocol
+
+App has 4 endpoints:
+   - POST /set-key
+   - GET /get-key/<key-name>
+   - GET /ping
+   - DELETE /delete-keys?keys=k1&keys=k2
+   
+Find [here](https://github.com/metrosystems-cpe/GopherLab/tree/master/redis-service) more details about using the API.
 
 ### url-shortener [@ionutvilie](https://github.com/ionutvilie)
 
