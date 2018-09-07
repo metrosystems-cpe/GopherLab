@@ -38,7 +38,7 @@ docker-build:
 
 docker-run: 
 	@echo ">> run docker image" ;
-	docker run --rm -p 8081:8081 --name url-shortener -d url-shortener ;
+	docker run --rm -p 8081:8081 --name ${BINARY} -d ${BINARY} ;
 
 release: linux docker
 
