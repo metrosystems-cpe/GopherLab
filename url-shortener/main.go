@@ -17,6 +17,7 @@ var (
 )
 
 func init() {
+	// in a cloud app read them from ENV
 	StoreConfig.Addr = "http://localhost:8080"
 	StoreConfig.Set = "/set-key"
 	StoreConfig.Get = "/get-key/"
@@ -82,18 +83,49 @@ func redirectHandler(wr http.ResponseWriter, req *http.Request) {
 	http.Redirect(wr, req, redirectURL, http.StatusMovedPermanently)
 }
 
+func healthHandler(wr http.ResponseWriter, req *http.Request) {
+	if origin := req.Header.Get("Origin"); origin != "" {
+		wr.Header().Set("Access-Control-Allow-Origin", origin)
+	}
+	wr.Header().Set("Access-Control-Allow-Methods", "GET")
+	wr.Header().Set("Content-Type", "application/json")
+	// Stop here if its Preflighted OPTIONS request
+	if req.Method == "OPTIONS" {
+		return
+	}
+	wr.WriteHeader(http.StatusOK)
+	wr.Write([]byte(`{"Status": "OK"}`))
+	// io.WriteString(wr, `{"Status": OK}`)
+}
+
 func main() {
 
 	var addr = flag.String("addr", ":8081", "The addr of the application.")
+
+	// we will use default go package: https://golang.org/pkg/net/http/#ServeMux
+	// and crete a ne multiplexer http server
 	mux := http.NewServeMux()
 
+	// root handler will redirect user to www folder and act as an http file server
 	mux.Handle("/", http.FileServer(http.Dir("./www")))
+
+	// metrics handler
 	mux.Handle("/metrics", utils.OCPrometheusExporter())
+
 	// shortener handler will not allow child routes as it does not have a final '/'
-	// mux.HandleFunc("/short", utils.WithMetrics(shortHandler))
-	mux.HandleFunc("/s", shortHandler)
+	// wrapped by a middleware that measures response times
+	mux.HandleFunc("/short", utils.WithMetrics(shortHandler))
+	// mux.HandleFunc("/s", shortHandler)
+
+	// redirect handler will allow child routes as it does have a final '/'
 	mux.HandleFunc("/r/", redirectHandler)
 
+	// health checks handlers - dummy implementation
+	// https://reliability.metrosystems.net/docs/dev-best-practices/kubernetes/health-checks/
+	mux.HandleFunc("/.well-known/live", healthHandler)
+	mux.HandleFunc("/.well-known/ready", healthHandler)
+
+	// start the http server
 	log.Println("Starting application on", *addr)
 	if err := http.ListenAndServe(*addr, mux); err != nil {
 		log.Fatal("ListenAndServe:", err)
