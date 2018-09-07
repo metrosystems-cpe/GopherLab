@@ -114,7 +114,7 @@ func main() {
 
 	// shortener handler will not allow child routes as it does not have a final '/'
 	// wrapped by a middleware that measures response times
-	mux.HandleFunc("/short", utils.WithMetrics(shortHandler))
+	mux.HandleFunc("/s", utils.WithMetrics(shortHandler))
 	// mux.HandleFunc("/s", shortHandler)
 
 	// redirect handler will allow child routes as it does have a final '/'

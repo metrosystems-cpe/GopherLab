@@ -1,0 +1,227 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vis/4.21.0/vis.min.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/vis/4.21.0/vis.min.css" rel="stylesheet" type="text/css" />
+    <!-- Compiled and minified CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-rc.2/css/materialize.min.css">
+
+
+    <style type="text/css">
+        body {
+            display: flex;
+            min-height: 100vh;
+            flex-direction: column;
+        }
+
+        main {
+            flex: 1 0 auto;
+        }
+
+        .container {
+            height: 600px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <nav class="indigo" role="navigation">
+            <div class="nav-wrapper container">
+                <a id="logo-container" href="#" class="brand-logo center">GopherLab</a>
+                <ul id="nav-mobile" class="right hide-on-med-and-down">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="about.html">About</a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <div class="container">
+            <div class="row">
+                <div class="container">
+                    <div class="col s12">
+                        <div class="card">
+                            <div class="card-content center-align">
+                                <div id="mynetwork" class="container">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="page-footer indigo">
+    </footer>
+
+    <script type="text/javascript">
+        // create an array with service
+        var services = new vis.DataSet([{
+                id: 0,
+                label: 'user',
+                group: 1,
+                level: 1,
+                shape: 'image',
+                image: './img/golang.png'
+            },
+            {
+                id: 2,
+                label: 'shortener:/',
+                group: 2,
+                level: 2,
+                shape: 'image',
+                image: './img/golang.png'
+            },
+            {
+                id: 3,
+                label: 'shortener:/s?url={url}',
+                group: 2,
+                level: 2,
+                shape: 'image',
+                image: './img/golang.png'
+            },
+            {
+                id: 4,
+                label: 'shortener:/r/{key}',
+                group: 2,
+                level: 2,
+                shape: 'image',
+                image: './img/golang.png'
+            },
+            {
+                id: 5,
+                label: 'redis-service:/set-key',
+                group: 3,
+                level: 3,
+                shape: 'image',
+                image: './img/golang.png'
+            },
+            {
+                id: 6,
+                label: 'redis-service:/get-key',
+                group: 3,
+                level: 3,
+                shape: 'image',
+                image: './img/golang.png'
+            },
+            {
+                id: 7,
+                label: 'redis',
+                group: 4,
+                level: 4,
+                shape: 'image',
+                image: './img/redis.png'
+            },
+        ]);
+        // create an array with edges
+        var edges = new vis.DataSet([{
+                from: 0,
+                to: 2
+            },
+            {
+                from: 0,
+                to: 3
+            },
+            {
+                from: 0,
+                to: 4
+            },
+            {
+                from: 2,
+                to: 3
+            },
+            {
+                from: 3,
+                to: 5
+            },
+            {
+                from: 4,
+                to: 6
+            },
+            {
+                from: 5,
+                to: 7
+            },
+            {
+                from: 6,
+                to: 7
+            },
+
+        ]);
+        // create a network
+        var container = document.getElementById('mynetwork');
+        var data = {
+            nodes: services,
+            edges: edges
+        };
+        var options = {
+            layout: {
+                randomSeed: 5,
+                improvedLayout: true,
+                hierarchical: {
+                    enabled: true,
+                    levelSeparation: 100,
+                    nodeSpacing: 100,
+                    treeSpacing: 200,
+                    blockShifting: false,
+                    edgeMinimization: true,
+                    parentCentralization: true,
+                    direction: 'UD', // UD, DU, LR, RL
+                    sortMethod: 'directed' // hubsize, directed
+                }
+            },
+            nodes: {
+                shape: 'box',
+                size: 20,
+                shapeProperties: {
+                    borderRadius: 0, // only for box shape
+                    interpolation: false, // only for image and image shapes
+                    useImageSize: false, // only for image and image shapes
+                    // useBorderWithImage: true
+                }
+            },
+            edges: {
+                width: 2,
+                smooth: true,
+                arrows: {
+                    // to: { enabled: true, scaleFactor: 0.4, type: 'circle'},
+                    middle: {
+                        enabled: true,
+                        scaleFactor: 0.4,
+                        type: 'arrow'
+                    },
+                    // from: {enabled: true, scaleFactor:0.4, type:'circle'}
+                },
+                arrowStrikethrough: false,
+            },
+            physics: {
+                enabled: true,
+                hierarchicalRepulsion: {
+                    centralGravity: 0.0,
+                    springLength: 75,
+                    springConstant: 0.01,
+                    nodeDistance: 150,
+                    damping: 0.1
+                },
+                stabilization: {
+                    enabled: true,
+                    iterations: 1000
+                }
+            }
+        };
+        var network = new vis.Network(container, data, options);
+    </script>
+    <!-- Compiled and minified JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-rc.2/js/materialize.min.js"></script>
+
+</body>
+
+</html>

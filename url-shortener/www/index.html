@@ -21,14 +21,15 @@
 
 <body>
     <header>
-        <div class="nav-wrapper">
-            <nav class="indigo" role="navigation" style="height: 64px;">
-                <div class="row">
-                    <!-- <div class="col s5"><p></p></div> -->
-                    <div class="col s1"><a href="#" class="brand-logo">GopherLab</a></div>
-                </div>
-            </nav>
-        </div>
+        <nav class="indigo" role="navigation">
+            <div class="nav-wrapper container">
+                <a id="logo-container" href="#" class="brand-logo center">GopherLab</a>
+                <ul id="nav-mobile" class="right hide-on-med-and-down">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="about.html">About</a></li>
+                </ul>
+            </div>
+        </nav>
     </header>
 
     <main>
@@ -40,7 +41,7 @@
                             <div class="card-content center-align">
                                 <!-- <span class="card-title">Welcome to GopherLab - HandsOn golang laboratory</span> -->
                                 <h4>HandsOn golang laboratory</h4>
-                                <img class="responsive-img" src="gopher.jpeg" />
+                                <img class="responsive-img" src="img/gopher.jpeg" />
                             </div>
                         </div>
                     </div>
@@ -68,15 +69,6 @@
         </div>
     </main>
     <footer class="page-footer indigo">
-        <div class="footer-copyright">
-            <div class="container">
-                <div class="row">
-                    <div class="col s2"><a href="https://confluence.metrosystems.net/display/MCRE" target="_blank" class="white-text text-lighten-4 right">Confluence</a></div>
-                    <div class="col s3"><a href="https://reliability.metrosystems.net/docs/#contact" target="_blank" class="white-text text-lighten-4 right">Reliability Engineering Docs</a></div>
-                    <div class="col s1"><a href="https://github.com/metrosystems-cpe/GopherLab" target="_blank" class="white-text text-lighten-4 right">Git Repo</a></div>
-                </div>        
-            </div>
-        </div>
     </footer>
 
     <script>

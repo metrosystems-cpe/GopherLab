@@ -26,7 +26,7 @@ Important: Change dir to this folder.
 ```bash
                            - path 'GET' /                --> index.html
                          /
-user --> url-shortener < - - path 'GET' /s&url={url}     --> receive a short url
+user --> url-shortener   - - path 'GET' /s?url={url}     --> receive a short url
                          \
                            - path 'GET' /r/{key}         --> 301 to original url
 ```
