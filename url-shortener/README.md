@@ -9,14 +9,26 @@ Features:
 - web     : simple html with materialize css and js + axios (credits for the gopher picture goes to the owner)
 - tests   : planed but not done !
 
+## How to use
+
+Important: Change dir to this folder.
+
+- get the deps: `go get`
+- start the app: `go run main.go`
+- build the app: `go build`
+- build docker image: `make docker-build`
+- run docker image: `make docker-run`
+- others: `make linux windows clean`
+
+
 ## Service description
 
 ```bash
-                           - path /                --> index.html
+                           - path 'GET' /                --> index.html
                          /
-user --> url-shortener < - - path /s&url={url}     --> receive a short url
+user --> url-shortener < - - path 'GET' /s&url={url}     --> receive a short url
                          \
-                           - path /r/{key}         --> 301 to original url
+                           - path 'GET' /r/{key}         --> 301 to original url
 ```
 
 ## Examples
