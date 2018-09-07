@@ -33,6 +33,10 @@ redirect path
 - storage service is contacted with the key in order to get the original URL
 - user is redirected to the original URL
 
+extra:
+
+- metrics instrumentation with opencensus.io 
+
 ## Prerequisites:
 
 1) [Go Lang](https://golang.org/dl/)
